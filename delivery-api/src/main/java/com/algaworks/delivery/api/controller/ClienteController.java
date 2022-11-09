@@ -1,12 +1,15 @@
 package com.algaworks.delivery.api.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.algaworks.delivery.domain.model.Cliente;
@@ -28,6 +31,18 @@ public class ClienteController {
 		//return clienteRepository.findByNome("Joao da Silva");
 		//return clienteRepository.findByNomeContaining("a");
 		return clienteRepository.findAll();
+	}
+	
+	@GetMapping("/obter/{clienteId}")
+	public ResponseEntity<Cliente> getCliente(@PathVariable Long clienteId) {
+		Optional<Cliente> opCliente = clienteRepository.findById(clienteId);
+		
+		if(opCliente.isPresent()) {
+			return ResponseEntity.ok(opCliente.get());
+		}
+		else {
+			return ResponseEntity.notFound().build();
+		}
 	}
 	
 }
