@@ -35,14 +35,20 @@ public class ClienteController {
 	
 	@GetMapping("/obter/{clienteId}")
 	public ResponseEntity<Cliente> getCliente(@PathVariable Long clienteId) {
-		Optional<Cliente> opCliente = clienteRepository.findById(clienteId);
+
+		return clienteRepository.findById(clienteId)
+//				.map(opCliente -> ResponseEntity.ok(opCliente))
+				.map(ResponseEntity::ok)
+				.orElse(ResponseEntity.notFound().build());
 		
-		if(opCliente.isPresent()) {
-			return ResponseEntity.ok(opCliente.get());
-		}
-		else {
-			return ResponseEntity.notFound().build();
-		}
+//		Optional<Cliente> opCliente = clienteRepository.findById(clienteId);
+		
+//		if(opCliente.isPresent()) {
+//			return ResponseEntity.ok(opCliente.get());
+//		}
+//		else {
+//			return ResponseEntity.notFound().build();
+//		}
 	}
 	
 }
