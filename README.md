@@ -7,9 +7,9 @@ Diagrama de Classes
 
 Tecnologias utilizadas:
 
-Spring Data JPA
-Spring Web
-MySQL
-Flyway Migration
-Lombok
-Spring Web
+- Spring Data JPA
+- Spring Web
+- MySQL
+- Flyway Migration
+- Lombok
+- Spring Web
